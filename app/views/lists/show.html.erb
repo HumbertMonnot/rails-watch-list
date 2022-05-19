@@ -1,0 +1,35 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://s3-us-west-2.amazonaws.com/prd-rteditorial/wp-content/uploads/2018/03/13153742/RT_300EssentialMovies_700X250.jpg);">
+  <div class="container">
+    <h1><%= @list.name.capitalize %></h1>  
+    <p>The movies below.</p>
+    <%# <a class="btn btn-flat" href="#">Apply now</a> %>
+  </div>
+</div>
+
+<%= link_to "Retour aux listes",  lists_path, class: "btn btn-gradient"%>
+<%= link_to "Nouveau bookmark",  new_list_bookmark_path(@list), class: "btn btn-gradient"%>
+
+  <div class="container">
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Movie</th>
+      <th scope="col">Comment</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <% @list.bookmarks.each_with_index do |bookmark, index| %>
+      <tr>
+        <th scope="row"><%= index + 1 %></th>
+        <td><%= bookmark.movie.title %></td>
+        <td><%= bookmark.comment %></td>
+        <td><%= link_to "Delete",  bookmark_path(bookmark), method: "delete"%></td>
+      </tr>
+    <% end %>
+  
+  </tbody>
+</table>
+  </div>
