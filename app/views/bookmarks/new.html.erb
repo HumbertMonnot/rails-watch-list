@@ -3,8 +3,9 @@
   <%= simple_form_for [@list, @bookmark] do |f| %>
     <%= f.input :comment %>
     <%= f.association :movie %>
+
     <%= f.button :submit, "Soumettre", class: "btn-outline-primary" %>
-    <%= link_to "Cancel", lists_path, class: "btn-outline-secondary" %>
+    <%= link_to "Cancel", list_path(@list), class: "btn-outline-secondary" %>
   <% end %>
 
 </div>

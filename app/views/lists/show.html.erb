@@ -6,11 +6,10 @@
   </div>
 </div>
 
-<%= link_to "Retour aux listes",  lists_path, class: "btn btn-gradient"%>
 <%= link_to "Nouveau bookmark",  new_list_bookmark_path(@list), class: "btn btn-gradient"%>
 
   <div class="container">
-<table class="table table-hover">
+<table class="table table-hover border-bottom pb-4">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -26,10 +25,41 @@
         <th scope="row"><%= index + 1 %></th>
         <td><%= bookmark.movie.title %></td>
         <td><%= bookmark.comment %></td>
-        <td><%= link_to "Delete",  bookmark_path(bookmark), method: "delete"%></td>
+        <td><%= button_to "to delete", bookmark_path(bookmark), method: "delete" %></td>
       </tr>
     <% end %>
   
   </tbody>
 </table>
+
+<div class="d-flex justify-content-between mb-5">
+  <div class="d-flex flex-column mt-5 w-50">
+  <ul class="list-group m-4">
+    <% @list.reviews.each_with_index do |review, index| %>
+      <li class="list-group-item">
+        <td><% review.rating.times do %>
+              <i class="fa-solid fa-star"></i>
+            <% end %>
+            <% (5-review.rating).times do %>
+              <i class="fa-regular fa-star"></i>
+            <% end %>
+        </td>
+        <td>      </td>
+        <td class="pl-2"><%= review.comment %></td>
+      </li>
+    <% end %>
+  </ul>
+  </div>
+
+  <div class="container mt-5 w-50">
+    <%= simple_form_for [@list, @review] do |f| %>
+      <%= f.input :comment %>
+      <%= f.input :rating, collection: [0, 1, 2, 3, 4, 5]%>
+
+      <%= f.button :submit, "Commenter", class: "btn-outline-primary" %>
+      <%= link_to "Cancel", list_reviews_path(@list), class: "btn-outline-secondary" %>
+    <% end %>
+  </div>
+
+</div>
   </div>
