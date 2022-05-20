@@ -8,6 +8,7 @@
 
 require 'faker'
 
+
 200.times do
   Movie.create(title: Faker::Movie.title, overview: Faker::Movie.quote)
 end
@@ -19,3 +20,13 @@ Movie.create(title: "Ocean's Eight", overview: "Debbie Ocean, a criminal masterm
 List.create(name: "drama")
 List.create(name: "To see")
 List.create(name: "for children")
+
+20.times do
+  list = (1..List.count).to_a.sample
+  nb_word = [1, 2, 3, 4, 5].sample
+  rating = [1, 2, 3, 4, 5].sample
+  comment = Faker::Lorem.sentence(word_count: nb_word)
+  Review.create(rating: rating, comment: comment, list_id: list)
+  movie = (1..50).to_a.sample
+  Bookmark.create(comment: comment, list_id: list, movie_id: movie)
+end

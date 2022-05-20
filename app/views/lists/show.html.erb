@@ -1,20 +1,23 @@
 <% if @list.poster.attached? %>
-  <div class="banner mt-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+  <div class="banner margin-under-navbar" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       url('<%= cl_image_path @list.poster.key%>')">
 <% else %>
-  <div class="banner mt-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+  <div class="banner margin-under-navbar" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
       url(https://www.benefsnet.com/images/cms/film.gif)">
 <% end %>
   <div class="container">
     <h1><%= @list.name.capitalize %></h1>  
-    <p>The movies below.</p>
+
     <%# <a class="btn btn-flat" href="#">Apply now</a> %>
   </div>
 </div>
 
 <%= link_to "Nouveau bookmark",  new_list_bookmark_path(@list), class: "btn btn-gradient"%>
 
+
   <div class="container">
+  <h3><%= @moy %> / 5</h3>
+  <br>
 <table class="table table-hover border-bottom pb-4">
   <thead>
     <tr>
@@ -31,7 +34,7 @@
         <th scope="row"><%= index + 1 %></th>
         <td><%= bookmark.movie.title %></td>
         <td><%= bookmark.comment %></td>
-        <td><%= button_to "to delete", bookmark_path(bookmark), method: "delete" %></td>
+        <td><%= link_to "", bookmark_path(bookmark), method: "delete", class: "fa-solid fa-trash-can" %></td>
       </tr>
     <% end %>
   
