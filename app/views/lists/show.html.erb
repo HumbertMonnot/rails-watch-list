@@ -1,4 +1,10 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://s3-us-west-2.amazonaws.com/prd-rteditorial/wp-content/uploads/2018/03/13153742/RT_300EssentialMovies_700X250.jpg);">
+<% if @list.poster.attached? %>
+  <div class="banner mt-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+      url('<%= cl_image_path @list.poster.key%>')">
+<% else %>
+  <div class="banner mt-5" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+      url(https://www.benefsnet.com/images/cms/film.gif)">
+<% end %>
   <div class="container">
     <h1><%= @list.name.capitalize %></h1>  
     <p>The movies below.</p>
